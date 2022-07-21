@@ -3,8 +3,28 @@
 
 export class board {
   public Row: row[];
+  public Turn = false;
   constructor() {
     this.Row = [...Array(8).keys()].map((i) => new row(i));
+    // 石の初期位置の設定
+    this.Row[3].Squares[3].squarestate = SquaresState.White;
+    this.Row[4].Squares[4].squarestate = SquaresState.White;
+    this.Row[3].Squares[4].squarestate = SquaresState.Black;
+    this.Row[4].Squares[3].squarestate = SquaresState.Black;
+  }
+  //   座標を受け取り石の状態を返るメソッド
+  public put(x: number, y: number) {
+    this.Row[y].Squares[x].squarestate = this.CangeTurn();
+  }
+  //   黒と白交互にターンを変更するメソッド
+  public CangeTurn(): SquaresState {
+    if (this.Turn === false) {
+      this.Turn = true;
+      return SquaresState.White;
+    } else {
+      this.Turn = false;
+      return SquaresState.Black;
+    }
   }
 }
 
@@ -33,16 +53,12 @@ export class squares {
     this.x = x;
     this.y = y;
   }
-
+  // マスの状態を取得するメソッド
   public get white(): boolean {
     return this.squarestate === SquaresState.White;
   }
   public get black(): boolean {
     return this.squarestate === SquaresState.Black;
-  }
-
-  public put() {
-    console.log(this.x, this.y);
   }
 }
 

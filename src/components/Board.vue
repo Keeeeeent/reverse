@@ -1,6 +1,11 @@
 <template>
   <div class="board">
-    <Row :rows="list" v-for="list in this.board.Row" :key="list.RowNumber" />
+    <Row
+      :rows="list"
+      v-for="list in this.board.Row"
+      :key="list.RowNumber"
+      @put="OnPut"
+    />
   </div>
 </template>
 
@@ -15,6 +20,9 @@ import { board } from "../models/reverse";
 })
 export default class Board extends Vue {
   public board: board = new board();
+  public OnPut(x: number, y: number) {
+    this.board.put(x, y);
+  }
 }
 </script>
 <style lang="scss" scoped>

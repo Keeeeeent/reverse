@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="squares"></div>
-    <div class="stone" :class="this.squareses.squaresstate" @click="put"></div>
+    <div class="stone" :class="changeclass" @click="OnClick"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Emit } from "vue-property-decorator";
 import { squares } from "../models/reverse";
 
 @Component
@@ -19,8 +19,13 @@ export default class Squares extends Vue {
       black: this.squareses.black,
     };
   }
-  public put() {
-    this.squareses.put();
+  @Emit("put")
+  public put(x: number, y: number) {
+    console.log("OK");
+  }
+
+  public OnClick() {
+    this.put(this.squareses.x, this.squareses.y);
   }
 }
 </script>
