@@ -1,2 +1,0 @@
-# reverse
-オセロをTypeScriptで作ってみる
