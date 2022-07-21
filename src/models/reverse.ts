@@ -17,7 +17,7 @@ export class row {
 
   constructor(num: number) {
     this.RowNumber = num;
-    this.Squares = [...Array(8).keys()].map((i) => new squares(num, i));
+    this.Squares = [...Array(8).keys()].map((i) => new squares(i, num));
   }
 }
 
@@ -33,6 +33,17 @@ export class squares {
     this.x = x;
     this.y = y;
   }
+
+  public get white(): boolean {
+    return this.squarestate === SquaresState.White;
+  }
+  public get black(): boolean {
+    return this.squarestate === SquaresState.Black;
+  }
+
+  public put() {
+    console.log(this.x, this.y);
+  }
 }
 
 // SquaresState・・石の状態を定義している
@@ -41,5 +52,5 @@ export class squares {
 export enum SquaresState {
   White = "white",
   Black = "black",
-  None = "node",
+  None = "none",
 }

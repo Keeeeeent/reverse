@@ -1,15 +1,28 @@
 <template>
   <div>
     <div class="squares"></div>
-    <div class="stone"></div>
+    <div class="stone" :class="this.squareses.squaresstate" @click="put"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { squares } from "../models/reverse";
 
 @Component
-export default class Squares extends Vue {}
+export default class Squares extends Vue {
+  @Prop({ required: true })
+  public squareses!: squares;
+  public get changeclass() {
+    return {
+      white: this.squareses.white,
+      black: this.squareses.black,
+    };
+  }
+  public put() {
+    this.squareses.put();
+  }
+}
 </script>
 <style lang="scss" scoped>
 div {
